@@ -8,6 +8,7 @@ But for multiples of three print “Fizz” instead of the number and for the mu
 
 
 Solution:
+
 To accomplish this task, we are going to use terraform to setup our infrastructure in AWS. We will create VPC, public subnet, security group, internet gateway, route table, EC2 instance on the top, we will install “git” to clone my git repository. We are using python language to print 1 to 100 considering the requirement.
 
 Terraform is one of the tools which can be used for building, changing, versioning our infrastructure safely and efficiently; which supports many service providers as well as custom in-house solutions.We are going to use AWS as provider in my case.
