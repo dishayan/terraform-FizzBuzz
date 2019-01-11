@@ -1,4 +1,4 @@
-# terraform-FizzBuzz
+# terraform-FizzBuzz-Debasish
 Manage FizzBuzz Challenge on AWS VPC with Terraform - Infrastructure as Code 
 
 Challenge:
