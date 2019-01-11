@@ -2,6 +2,7 @@
 Manage FizzBuzz Challenge on AWS VPC with Terraform - Infrastructure as Code 
 
 Challenge:
+
 working infrastructure-as-code example that provisions a service to execute an implementation of the below FizzBuzz coding challenge 
 
 Write a program that prints the numbers from 1 to 100.
