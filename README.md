@@ -23,12 +23,9 @@ Once we confirm then all operations are applied on aws.
 
 You can download the terraform code files (explained below) from my git repository. 
 
-provider.tf ---- used to declare “aws” as provier 
-
+provider.tf ---- used to declare “aws” as provier
 variables.tf ---- used to have various variables
-
 user_data.sh --- to be run as “user_data” while ec2 instance boot up to clone git repo.
-
 vpc.tf --- main configuration file for aws resources setup
 
 
