@@ -30,14 +30,16 @@ Please don’t forget to export your AWS credentials before running terraform co
 
 
 export AWS_ACCESS_KEY_ID=xxxxxxxx
-
 export AWS_SECRET_ACCESS_KEY=xxxxxx
 
-The first command to run for a new configuration is “terraform init” which initialises various settings and data, download provider plugin and install in a subdirectory of the current working directory.
+# Usage
+To run this you need to execute:
 
-Once we init, we want to know what exactly is going to happen on aws infrastructure, this can be done by running command terraform plan. Terraform plan is used to create an execution plan which is a way to check whether the set of changes matches our expectation without making any real infrastructure changes.
+$ terraform init
+$ terraform plan
+$ terraform apply
 
-This is the time to actually create our resources on aws, terraform apply command is used to apply the changes required to reach the desired state. Terraform apply scans current directory for the configuration and apply the changes on aws. When we run apply it shows us plan and ask for confirmation before executing the plan.
+Run terraform destroy when you don't need these resources.
 
 Once we confirm then all operations are applied on aws.
 
