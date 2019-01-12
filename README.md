@@ -28,6 +28,7 @@ vpc.tf --- main configuration file for aws resources setup
 
 # Usage
 To run this you need to execute:
+
 $export AWS_ACCESS_KEY_ID=xxxxxxxx
 
 $export AWS_SECRET_ACCESS_KEY=xxxxxx
