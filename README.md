@@ -1,7 +1,7 @@
 # terraform-FizzBuzz-Debasish
 Manage FizzBuzz Challenge on AWS VPC with Terraform - Infrastructure as Code 
 
-Challenge:
+# Challenge:
 
 working infrastructure-as-code example that provisions a service to execute an implementation of the below FizzBuzz coding challenge 
 
@@ -9,7 +9,7 @@ working infrastructure-as-code example that provisions a service to execute an i
 But for multiples of three print “Fizz” instead of the number and for the multiples of five print “Buzz”. For numbers which are multiples of both three and five print “FizzBuzz”."
 
 
-Solution:
+# Solution:
 
 To accomplish this task, we are going to use terraform to setup our infrastructure in AWS. We will create VPC, public subnet, security group, internet gateway, route table, EC2 instance on the top, we will install “git” to clone my git repository. We are using python language to print 1 to 100 considering the requirement.
 
@@ -30,13 +30,16 @@ Please don’t forget to export your AWS credentials before running terraform co
 
 
 export AWS_ACCESS_KEY_ID=xxxxxxxx
+
 export AWS_SECRET_ACCESS_KEY=xxxxxx
 
 # Usage
 To run this you need to execute:
 
 $ terraform init
+
 $ terraform plan
+
 $ terraform apply
 
 Run terraform destroy when you don't need these resources.
