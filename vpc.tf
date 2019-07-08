@@ -70,13 +70,13 @@ resource "aws_security_group" "fizzbuzz-sg" {
 }
 # Define SSH key pair for our instances
 resource "aws_key_pair" "default" {
-  key_name = "fizzbuzzvpctestkeypair"
+  #key_name = "horizonvpctestkeypair"
   public_key = "${file("${var.key_path}")}"
 }
 # Define FizzBUzz server inside the public subnet
 resource "aws_instance" "fizzbuzz-inst" {
    ami  = "${var.ami}"
-   instance_type = "t1.micro"
+   instance_type = "t2.micro"
    key_name = "${aws_key_pair.default.id}"
    subnet_id = "${aws_subnet.fizzbuzz-public-subnet.id}"
    vpc_security_group_ids = ["${aws_security_group.fizzbuzz-sg.id}"]
