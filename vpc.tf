@@ -4,49 +4,78 @@ resource "aws_vpc" "default" {
   enable_dns_hostnames = true
 
   tags {
-    Name = "FizzBuzz-vpc"
+    Name = "GCC-vpc"
   }
 }
 # Define the public subnet
-resource "aws_subnet" "fizzbuzz-public-subnet" {
+resource "aws_subnet" "GCC-public-subnet" {
   vpc_id = "${aws_vpc.default.id}"
   cidr_block = "${var.public_subnet_cidr}"
   availability_zone = "us-east-1a"
 
   tags {
-    Name = "FizzBuzz Public Subnet"
+    Name = "GCC Public Subnet"
+  }
+}
+# Define the private subnet
+resource "aws_subnet" "GCC-private-subnet" {
+  vpc_id = "${aws_vpc.default.id}"
+  cidr_block = "${var.private_subnet_cidr}"
+  availability_zone = "us-east-1b"
+
+  tags { 
+    Name = "GCC Private Subnet"
   }
 }
 # Define the internet gateway
-resource "aws_internet_gateway" "fizzbuzz-gw" {
+resource "aws_internet_gateway" "GCC-gw" {
   vpc_id = "${aws_vpc.default.id}"
 
   tags {
-    Name = "FizzBuzz VPC IGW"
+    Name = "GCC VPC IGW"
   }
 }
 # Define the route table
-resource "aws_route_table" "fizzbuzz-public-rt" {
+resource "aws_route_table" "GCC-public-rt" {
   vpc_id = "${aws_vpc.default.id}"
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = "${aws_internet_gateway.fizzbuzz-gw.id}"
+    gateway_id = "${aws_internet_gateway.GCC-gw.id}"
   }
 
   tags {
     Name = "Public Subnet RT"
   }
 }
+# Define the route table
+resource "aws_route_table" "GCC-private-rt" {
+  vpc_id = "${aws_vpc.default.id}"
+
+  route {
+    cidr_block = "0.0.0.0/0"
+   gateway_id = "${aws_internet_gateway.GCC-gw.id}"
+  }
+
+  tags {
+    Name = "Private Subnet RT"
+  }
+}
 
 # Assign the route table to the public Subnet
-resource "aws_route_table_association" "fizzbuzz-public-rt" {
-  subnet_id = "${aws_subnet.fizzbuzz-public-subnet.id}"
-  route_table_id = "${aws_route_table.fizzbuzz-public-rt.id}"
+resource "aws_route_table_association" "GCC-public-rt" {
+  subnet_id = "${aws_subnet.GCC-public-subnet.id}"
+  route_table_id = "${aws_route_table.GCC-public-rt.id}"
 }
+# Assign the route table to the private Subnet
+resource "aws_route_table_association" "GCC-private-rt" {
+  subnet_id = "${aws_subnet.GCC-private-subnet.id}"
+  route_table_id = "${aws_route_table.GCC-private-rt.id}"
+}
+
 # Define the security group for public subnet
-resource "aws_security_group" "fizzbuzz-sg" {
-  name = "FizzBuzz-SG"
+resource "aws_security_group" "GCC-sg" {
+  name = "GCC-SG"
   description = "All access"
   
 
@@ -65,7 +94,7 @@ resource "aws_security_group" "fizzbuzz-sg" {
   vpc_id="${aws_vpc.default.id}"
 
   tags {
-    Name = "FizzBuzz SG"
+    Name = "GCC SG"
   }
 }
 # Define SSH key pair for our instances
@@ -73,17 +102,17 @@ resource "aws_key_pair" "default" {
   #key_name = "horizonvpctestkeypair"
   public_key = "${file("${var.key_path}")}"
 }
-# Define FizzBUzz server inside the public subnet
-resource "aws_instance" "fizzbuzz-inst" {
+# Define GCC server inside the public subnet
+resource "aws_instance" "GCC-inst" {
    ami  = "${var.ami}"
    instance_type = "t2.micro"
    key_name = "${aws_key_pair.default.id}"
-   subnet_id = "${aws_subnet.fizzbuzz-public-subnet.id}"
-   vpc_security_group_ids = ["${aws_security_group.fizzbuzz-sg.id}"]
+   subnet_id = "${aws_subnet.GCC-public-subnet.id}"
+   vpc_security_group_ids = ["${aws_security_group.GCC-sg.id}"]
    associate_public_ip_address = true
    source_dest_check = false
    user_data = "${file("user_data.sh")}"
   tags {
-    Name = "fizzbuzzserver"
+    Name = "GCCserver"
   }
 }
