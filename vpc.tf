@@ -3,7 +3,7 @@ resource "aws_vpc" "default" {
   cidr_block = "${var.vpc_cidr}"
   enable_dns_hostnames = true
 
-  tags {
+  tags = {
     Name = "GCC-vpc"
   }
 }
@@ -13,7 +13,7 @@ resource "aws_subnet" "GCC-public-subnet" {
   cidr_block = "${var.public_subnet_cidr}"
   availability_zone = "us-east-1a"
 
-  tags {
+  tags = {
     Name = "GCC Public Subnet"
   }
 }
@@ -23,7 +23,7 @@ resource "aws_subnet" "GCC-private-subnet" {
   cidr_block = "${var.private_subnet_cidr}"
   availability_zone = "us-east-1b"
 
-  tags { 
+  tags = { 
     Name = "GCC Private Subnet"
   }
 }
@@ -31,7 +31,7 @@ resource "aws_subnet" "GCC-private-subnet" {
 resource "aws_internet_gateway" "GCC-gw" {
   vpc_id = "${aws_vpc.default.id}"
 
-  tags {
+  tags = {
     Name = "GCC VPC IGW"
   }
 }
@@ -44,7 +44,7 @@ resource "aws_route_table" "GCC-public-rt" {
     gateway_id = "${aws_internet_gateway.GCC-gw.id}"
   }
 
-  tags {
+  tags = {
     Name = "Public Subnet RT"
   }
 }
@@ -57,7 +57,7 @@ resource "aws_route_table" "GCC-private-rt" {
    gateway_id = "${aws_internet_gateway.GCC-gw.id}"
   }
 
-  tags {
+  tags = {
     Name = "Private Subnet RT"
   }
 }
@@ -93,7 +93,7 @@ resource "aws_security_group" "GCC-sg" {
   }
   vpc_id="${aws_vpc.default.id}"
 
-  tags {
+  tags = {
     Name = "GCC SG"
   }
 }
@@ -112,7 +112,7 @@ resource "aws_instance" "GCC-inst" {
    associate_public_ip_address = true
    source_dest_check = false
    user_data = "${file("user_data.sh")}"
-  tags {
+  tags = {
     Name = "GCCserver"
   }
 }
